@@ -16,6 +16,7 @@ namespace AddressBook
                 Console.WriteLine("Enter the following choice");
                 Console.WriteLine("1. Add Contacts");
                 Console.WriteLine("2. Edit Contacts");
+                Console.WriteLine("3. Delete Contacts");
                 Console.WriteLine("4. Display Contacts");
                 Console.WriteLine("5. Exit");
                 Console.WriteLine("Enter your choice: ");
@@ -128,6 +129,19 @@ namespace AddressBook
                                 Console.WriteLine("Enter a valid name");
                             }
                         }
+                        break;
+                    case 3:
+                        Console.WriteLine("Enter the first name of the person: ");
+                        string fst = Console.ReadLine();
+                        List<Contacts> lst=contacts;
+                        foreach(Contacts c in contacts)
+                        {
+                            if (c.first_name.Equals(fst))
+                            {
+                                contacts.Remove(c);
+                            }
+                        }
+                        Console.WriteLine("Contact Removed Successfully");
                         break;
                     case 4:
                         foreach (Contacts c in contacts)
