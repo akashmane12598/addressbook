@@ -133,14 +133,15 @@ namespace AddressBook
                     case 3:
                         Console.WriteLine("Enter the first name of the person: ");
                         string fst = Console.ReadLine();
-                        List<Contacts> lst=contacts;
+                        List<Contacts> lst = new List<Contacts>();
                         foreach(Contacts c in contacts)
                         {
                             if (c.first_name.Equals(fst))
                             {
-                                contacts.Remove(c);
+                                lst.Add(c);             //we can't delete the object while iterating through the list, it leads to exception
                             }
                         }
+                        contacts.RemoveAll(i => lst.Contains(i));
                         Console.WriteLine("Contact Removed Successfully");
                         break;
                     case 4:
