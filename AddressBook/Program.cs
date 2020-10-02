@@ -7,7 +7,6 @@ namespace AddressBook
     {
         static void Main(string[] args)
         {
-            List<Contacts> contacts=new List<Contacts>();
             //Dictionary<String,List<List<Contacts>>> sorted= new Dictionary<String,List<List<Contacts>>>();
             Dictionary<String, List<Contacts>> sorted = new Dictionary<String, List<Contacts>>();
             int c1 = 0;
@@ -16,6 +15,7 @@ namespace AddressBook
                 string bname="";
                 Console.WriteLine("Welcome to Address Book Program");
                 int choice = 0;
+                List<Contacts> gcontacts = new List<Contacts>();   //stores contacts list for different address books
                 Console.WriteLine("1. Add Address Book: ");
                 Console.WriteLine("2. Display Address Book: ");
                 Console.WriteLine("3. Exit");
@@ -26,9 +26,10 @@ namespace AddressBook
                     case 1:
                         Console.WriteLine("Enter the name of Address Book: ");
                         bname = Console.ReadLine();
+                        List<Contacts> contacts = new List<Contacts>();  //stores contacts list for a particular book
                         while (choice != 5)
                         {
-                            List<Contacts> list = new List<Contacts>();
+                            List<Contacts> list = new List<Contacts>();     //here contact obj is stored temporarly, changes when edited and deleted
                             int flag = 0;
                             Console.WriteLine("Enter the following choice");
                             Console.WriteLine("1. Add Contacts");
@@ -170,7 +171,8 @@ namespace AddressBook
                             }
                             contacts.AddRange(list);
                         }
-                        sorted.Add(bname, contacts);
+                        gcontacts.AddRange(contacts);
+                        sorted.Add(bname, gcontacts);
                         break;
                     case 2:
                         foreach (KeyValuePair<String, List<Contacts>> kv in sorted)
