@@ -9,7 +9,7 @@ namespace AddressBook
         {
             Dictionary<String, List<Contacts>> sorted = new Dictionary<String, List<Contacts>>();
             int c1 = 0;
-            while (c1 != 4)
+            while (c1 != 5)
             {
                 string bname="";
                 Console.WriteLine("Welcome to Address Book Program");
@@ -17,7 +17,8 @@ namespace AddressBook
                 Console.WriteLine("1. Add Address Book: ");
                 Console.WriteLine("2. Edit a Particular Address Book: ");
                 Console.WriteLine("3. Display Address Book: ");
-                Console.WriteLine("4. Exit");
+                Console.WriteLine("4. View Person's Details By City: ");
+                Console.WriteLine("5. Exit");
                 Console.WriteLine("Enter your choice: ");
                 c1 = Convert.ToInt32(Console.ReadLine());
                 switch (c1)
@@ -56,6 +57,40 @@ namespace AddressBook
                                 Console.WriteLine(c);
                             }
                         }
+                        break;
+                    case 4:
+                        Console.WriteLine("Enter the city: ");
+                        string city = Console.ReadLine();
+
+                        Dictionary<string,List<Contacts>> cty = new Dictionary<string,List<Contacts>>();
+                        List<Contacts> gtemp = new List<Contacts>();
+
+                        foreach (KeyValuePair<string,List<Contacts>> kv in sorted)
+                        {
+                            List<Contacts> list1 = kv.Value; //gives list details per address book
+                            List<Contacts> temp = new List<Contacts>();
+                            foreach (Contacts c in list1)
+                            {                                
+                                if (c.city.ToLower().Equals(city.ToLower()))
+                                {
+                                    temp.Add(c);
+                                }
+                            }
+                            gtemp.AddRange(temp);            //Appends person's details per book by city               
+                        }
+                        cty.Add(city, gtemp);
+
+                        foreach (KeyValuePair<string, List<Contacts>> kv in cty)
+                        {
+                            string a = kv.Key;
+                            List<Contacts> lst = kv.Value;
+                            Console.WriteLine("City Name: " + a);
+                            foreach (Contacts c in lst)
+                            {                                
+                                Console.WriteLine(c);
+                            }
+                        }
+
                         break;
 
                 }
