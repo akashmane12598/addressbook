@@ -88,22 +88,35 @@ namespace AddressBook
                         string first_name = Console.ReadLine();
                         Console.WriteLine("Enter the lastname: ");
                         string last_name = Console.ReadLine();
-                        Console.WriteLine("Enter the address: ");
-                        string address = Console.ReadLine();
-                        Console.WriteLine("Enter the city: ");
-                        string city = Console.ReadLine();
-                        Console.WriteLine("Enter the state: ");
-                        string state = Console.ReadLine();
-                        Console.WriteLine("Enter the zip: ");
-                        int zip = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine("Enter the phone number");
-                        long phone = Convert.ToInt64(Console.ReadLine());
-                        Console.WriteLine("Enter the email: ");
-                        string email = Console.ReadLine();
+                        int flag1 = 0;
+                        foreach(Contacts ct in contacts)
+                        {
+                            if(ct.first_name.ToLower().Equals(first_name.ToLower()) && ct.last_name.ToLower().Equals(last_name.ToLower()))
+                            {
+                                Console.WriteLine("Entry of this name is already present. Please enter a new Name");
+                                flag1 = 1;
+                                break;
+                            }
+                        }
+                        if (flag1 == 0) //Allows if New Name is entered
+                        {
+                            Console.WriteLine("Enter the address: ");
+                            string address = Console.ReadLine();
+                            Console.WriteLine("Enter the city: ");
+                            string city = Console.ReadLine();
+                            Console.WriteLine("Enter the state: ");
+                            string state = Console.ReadLine();
+                            Console.WriteLine("Enter the zip: ");
+                            int zip = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Enter the phone number");
+                            long phone = Convert.ToInt64(Console.ReadLine());
+                            Console.WriteLine("Enter the email: ");
+                            string email = Console.ReadLine();
 
-                        Contacts ct1 = new Contacts(first_name, last_name, address, city, state, zip, phone, email);
-                        list.Add(ct1);
-                        Console.WriteLine("Contact Added Successfully");
+                            Contacts ct1 = new Contacts(first_name, last_name, address, city, state, zip, phone, email);
+                            list.Add(ct1);
+                            Console.WriteLine("Contact Added Successfully");
+                        }
                         break;
 
                     case 2:
