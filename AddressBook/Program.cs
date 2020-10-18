@@ -76,7 +76,7 @@ namespace AddressBook
                                 if (c.city.ToLower().Equals(city.ToLower()))
                                 {
                                     temp.Add(c);
-                                    fg = 1;
+                                    fg++;
                                 }
                             }
                             gtemp.AddRange(temp);            //Appends person's details per book by city               
@@ -89,6 +89,7 @@ namespace AddressBook
                         }
                         else
                         {
+                            Console.WriteLine("Total records for City Name "+city+": "+fg);
                             foreach (KeyValuePair<string, List<Contacts>> kv in cty)
                             {
                                 string a = kv.Key;
@@ -119,7 +120,7 @@ namespace AddressBook
                                 if (c.state.ToLower().Equals(state.ToLower()))
                                 {
                                     temp.Add(c);
-                                    fg1 = 1;
+                                    fg1++;
                                 }
                             }
                             gtemp1.AddRange(temp);            //Appends person's details per book by state               
@@ -132,6 +133,7 @@ namespace AddressBook
                         }
                         else
                         {
+                            Console.WriteLine("Total records for State Name " + state + ": " + fg1);
                             foreach (KeyValuePair<string, List<Contacts>> kv in st)
                             {
                                 string a = kv.Key;
