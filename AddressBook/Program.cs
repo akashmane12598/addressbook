@@ -9,7 +9,7 @@ namespace AddressBook
         {
             Dictionary<String, List<Contacts>> sorted = new Dictionary<String, List<Contacts>>();
             int c1 = 0;
-            while (c1 != 5)
+            while (c1 != 6)
             {
                 string bname="";
                 Console.WriteLine("Welcome to Address Book Program");
@@ -18,7 +18,8 @@ namespace AddressBook
                 Console.WriteLine("2. Edit a Particular Address Book: ");
                 Console.WriteLine("3. Display Address Book: ");
                 Console.WriteLine("4. View Person's Details By City: ");
-                Console.WriteLine("5. Exit");
+                Console.WriteLine("5. View Person's Details By State: ");
+                Console.WriteLine("6. Exit");
                 Console.WriteLine("Enter your choice: ");
                 c1 = Convert.ToInt32(Console.ReadLine());
                 switch (c1)
@@ -59,8 +60,9 @@ namespace AddressBook
                         }
                         break;
                     case 4:
-                        Console.WriteLine("Enter the city: ");
+                        Console.WriteLine("Enter the City Name: ");
                         string city = Console.ReadLine();
+                        int fg = 0;
 
                         Dictionary<string,List<Contacts>> cty = new Dictionary<string,List<Contacts>>();
                         List<Contacts> gtemp = new List<Contacts>();
@@ -74,25 +76,75 @@ namespace AddressBook
                                 if (c.city.ToLower().Equals(city.ToLower()))
                                 {
                                     temp.Add(c);
+                                    fg = 1;
                                 }
                             }
                             gtemp.AddRange(temp);            //Appends person's details per book by city               
                         }
                         cty.Add(city, gtemp);
 
-                        foreach (KeyValuePair<string, List<Contacts>> kv in cty)
+                        if (fg == 0)
                         {
-                            string a = kv.Key;
-                            List<Contacts> lst = kv.Value;
-                            Console.WriteLine("City Name: " + a);
-                            foreach (Contacts c in lst)
-                            {                                
-                                Console.WriteLine(c);
+                            Console.WriteLine("Mentioned City Name isn't present in Address Book");
+                        }
+                        else
+                        {
+                            foreach (KeyValuePair<string, List<Contacts>> kv in cty)
+                            {
+                                string a = kv.Key;
+                                List<Contacts> lst = kv.Value;
+                                Console.WriteLine("City Name: " + a);
+                                foreach (Contacts c in lst)
+                                {
+                                    Console.WriteLine(c);
+                                }
                             }
                         }
 
                         break;
+                    case 5:
+                        Console.WriteLine("Enter the State Name: ");
+                        string state = Console.ReadLine();
+                        int fg1 = 0;
 
+                        Dictionary<string, List<Contacts>> st = new Dictionary<string, List<Contacts>>();
+                        List<Contacts> gtemp1 = new List<Contacts>();
+
+                        foreach (KeyValuePair<string, List<Contacts>> kv in sorted)
+                        {
+                            List<Contacts> list1 = kv.Value; //gives list details per address book
+                            List<Contacts> temp = new List<Contacts>();
+                            foreach (Contacts c in list1)
+                            {
+                                if (c.state.ToLower().Equals(state.ToLower()))
+                                {
+                                    temp.Add(c);
+                                    fg1 = 1;
+                                }
+                            }
+                            gtemp1.AddRange(temp);            //Appends person's details per book by state               
+                        }
+                        st.Add(state, gtemp1);
+
+                        if (fg1 == 0)
+                        {
+                            Console.WriteLine("Mentioned State Name isn't present in Address Book");
+                        }
+                        else
+                        {
+                            foreach (KeyValuePair<string, List<Contacts>> kv in st)
+                            {
+                                string a = kv.Key;
+                                List<Contacts> lst = kv.Value;
+                                Console.WriteLine("City Name: " + a);
+                                foreach (Contacts c in lst)
+                                {
+                                    Console.WriteLine(c);
+                                }
+                            }
+                        }
+
+                        break;
                 }
 
             }
