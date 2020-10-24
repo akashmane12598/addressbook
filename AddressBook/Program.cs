@@ -157,7 +157,7 @@ namespace AddressBook
         {
             int choice = 0;
             string bname="";
-            while (choice != 5)
+            while (choice != 8)
             {
                 List<Contacts> list = new List<Contacts>();     //here contact obj is stored temporarly, changes when edited and deleted
                 int flag = 0;
@@ -165,8 +165,11 @@ namespace AddressBook
                 Console.WriteLine("1. Add Contacts");
                 Console.WriteLine("2. Edit Contacts");
                 Console.WriteLine("3. Delete Contacts");
-                Console.WriteLine("4. Display Contacts");
-                Console.WriteLine("5. Exit");
+                Console.WriteLine("4. Display Contacts(Sorted By Name)");
+                Console.WriteLine("5. Display Contacts(Sorted By City)");
+                Console.WriteLine("6. Display Contacts(Sorted By State)");
+                Console.WriteLine("7. Display Contacts(Sorted By Zip)");
+                Console.WriteLine("8. Exit");
                 Console.WriteLine("Enter your choice: ");
                 choice = Convert.ToInt32(Console.ReadLine());
 
@@ -306,7 +309,36 @@ namespace AddressBook
                         Console.WriteLine("Contact Removed Successfully");
                         break;
                     case 4:
-                        contacts.Sort();
+                        Contacts cts1 = new Contacts();
+                        cts1.SortByName(contacts);
+
+                        foreach (Contacts c in contacts)
+                        {
+                            Console.WriteLine(c);
+                        }
+                        break;
+                    case 5:
+                        Contacts cts2 = new Contacts();
+                        cts2.SortByCity(contacts);
+
+                        foreach (Contacts c in contacts)
+                        {
+                            Console.WriteLine(c);
+                        }
+                        break;
+                    case 6:
+                        Contacts cts3 = new Contacts();
+                        cts3.SortByState(contacts);
+
+                        foreach (Contacts c in contacts)
+                        {
+                            Console.WriteLine(c);
+                        }
+                        break;
+                    case 7:
+                        Contacts cts4 = new Contacts();
+                        cts4.SortByZip(contacts);
+
                         foreach (Contacts c in contacts)
                         {
                             Console.WriteLine(c);

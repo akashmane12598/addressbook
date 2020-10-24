@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AddressBook
 {
-    class Contacts:IComparable
+    class Contacts
     {
         public string first_name;
         public string last_name;
@@ -27,15 +27,31 @@ namespace AddressBook
             this.email = email;
         }
 
+        public Contacts( )
+        {
+            
+        }
+
         public override string ToString()
         {
             return "First Name: "+first_name+", "+"Last Name: "+last_name+", "+"Address: "+address+", "+"City: "+city+", "+"State: "+state+", "+"Zip: "+zip+", Phone Number: "+phone+", Email-id: "+email;
         }
 
-        public int CompareTo(object obj)
+        public void SortByName(List<Contacts> contacts)
         {
-            Contacts c = (Contacts)obj;
-            return this.first_name.CompareTo(c.first_name);
+            contacts.Sort((contact1, contact2)=>contact1.first_name.CompareTo(contact2.first_name));
+        }
+        public void SortByCity(List<Contacts> contacts)
+        {
+            contacts.Sort((contact1, contact2)=> contact1.city.CompareTo(contact2.city));
+        }
+        public void SortByState(List<Contacts> contacts)
+        {
+            contacts.Sort((contact1, contact2)=> contact1.state.CompareTo(contact2.state));
+        }
+        public void SortByZip(List<Contacts> contacts)
+        {
+            contacts.Sort((contact1 ,contact2)=> contact1.zip.CompareTo(contact2.zip));
         }
     }
 }
