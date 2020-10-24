@@ -1,26 +1,34 @@
 ﻿using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace AddressBook
 {
     class Program
     {
+        public static string filePath=@"C:\Users\LENOVO\source\repos\AddressBook\AddressBook\AddressBook.txt";
+
         public static void Main(string[] args)
         {
             Dictionary<String, List<Contacts>> sorted = new Dictionary<String, List<Contacts>>();
             int c1 = 0;
-            while (c1 != 6)
+            while (c1 != 9)
             {
                 string bname="";
                 Console.WriteLine("Welcome to Address Book Program");
                 List<Contacts> gcontacts = new List<Contacts>();   //stores contacts list for different address books
+                
                 Console.WriteLine("1. Add Address Book: ");
                 Console.WriteLine("2. Edit a Particular Address Book: ");
                 Console.WriteLine("3. Display Address Book: ");
                 Console.WriteLine("4. View Person's Details By City: ");
                 Console.WriteLine("5. View Person's Details By State: ");
-                Console.WriteLine("6. Exit");
+                Console.WriteLine("6. Write Address Book into a File: ");
+                Console.WriteLine("7. Read Address Book from a File: ");
+                Console.WriteLine("8. Clear Address Book Details from a File: ");
+                Console.WriteLine("9. Exit");
+
                 Console.WriteLine("Enter your choice: ");
                 c1 = Convert.ToInt32(Console.ReadLine());
                 switch (c1)
@@ -65,15 +73,15 @@ namespace AddressBook
                         string city = Console.ReadLine();
                         int fg = 0;
 
-                        Dictionary<string,List<Contacts>> cty = new Dictionary<string,List<Contacts>>();
+                        Dictionary<string, List<Contacts>> cty = new Dictionary<string, List<Contacts>>();
                         List<Contacts> gtemp = new List<Contacts>();
 
-                        foreach (KeyValuePair<string,List<Contacts>> kv in sorted)
+                        foreach (KeyValuePair<string, List<Contacts>> kv in sorted)
                         {
                             List<Contacts> list1 = kv.Value; //gives list details per address book
                             List<Contacts> temp = new List<Contacts>();
                             foreach (Contacts c in list1)
-                            {                                
+                            {
                                 if (c.city.ToLower().Equals(city.ToLower()))
                                 {
                                     temp.Add(c);
@@ -90,7 +98,7 @@ namespace AddressBook
                         }
                         else
                         {
-                            Console.WriteLine("Total records for City Name "+city+": "+fg);
+                            Console.WriteLine("Total records for City Name " + city + ": " + fg);
                             foreach (KeyValuePair<string, List<Contacts>> kv in cty)
                             {
                                 string a = kv.Key;
@@ -148,6 +156,51 @@ namespace AddressBook
                         }
 
                         break;
+                    case 6:
+                        if (File.Exists(filePath))
+                        {
+                            using (StreamWriter stw = File.CreateText(filePath))
+                            {
+                                foreach (KeyValuePair<String, List<Contacts>> kv in sorted)
+                                {
+                                    string a = kv.Key;
+                                    List<Contacts> list1 = (List<Contacts>)kv.Value;
+                                    stw.WriteLine("Address Book Name: " + a);
+                                    foreach (Contacts c in list1)
+                                    {
+                                        stw.WriteLine(c);
+                                    }
+                                }
+                                Console.WriteLine("Address Book written into the file successfully!!!");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("File doesn't exist!!!");
+                        }
+                        break;
+                    case 7:
+                        if (File.Exists(filePath))
+                        {
+                            using (StreamReader str = File.OpenText(filePath))
+                            {
+                                string s = "";
+                                while ((s = str.ReadLine()) != null)
+                                {
+                                    Console.WriteLine(s);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("File doesn't exist!!!");
+                        }
+                        break;
+                    case 8:
+                        File.WriteAllText(filePath, string.Empty);
+                        Console.WriteLine("Data cleared successfully!!!");
+                        break;
+                    
                 }
 
             }
