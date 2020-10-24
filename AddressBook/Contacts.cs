@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AddressBook
 {
-    class Contacts
+    class Contacts:IComparable
     {
         public string first_name;
         public string last_name;
@@ -32,5 +32,10 @@ namespace AddressBook
             return "First Name: "+first_name+", "+"Last Name: "+last_name+", "+"Address: "+address+", "+"City: "+city+", "+"State: "+state+", "+"Zip: "+zip+", Phone Number: "+phone+", Email-id: "+email;
         }
 
+        public int CompareTo(object obj)
+        {
+            Contacts c = (Contacts)obj;
+            return this.first_name.CompareTo(c.first_name);
+        }
     }
 }

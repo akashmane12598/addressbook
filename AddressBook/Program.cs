@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 
 namespace AddressBook
@@ -205,7 +206,7 @@ namespace AddressBook
                             Contacts ct1 = new Contacts(first_name, last_name, address, city, state, zip, phone, email);
                             list.Add(ct1);
                             Console.WriteLine("Contact Added Successfully");
-                        }
+                        }                        
                         break;
 
                     case 2:
@@ -305,6 +306,7 @@ namespace AddressBook
                         Console.WriteLine("Contact Removed Successfully");
                         break;
                     case 4:
+                        contacts.Sort();
                         foreach (Contacts c in contacts)
                         {
                             Console.WriteLine(c);
