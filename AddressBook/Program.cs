@@ -5,7 +5,7 @@ using System.IO;
 
 namespace AddressBook
 {
-    class Program
+    public class Program
     {
         public static string filePath=@"C:\Users\LENOVO\source\repos\AddressBook\AddressBook\AddressBook.txt";
 
@@ -26,8 +26,10 @@ namespace AddressBook
                 Console.WriteLine("5. View Person's Details By State: ");
                 Console.WriteLine("6. Write Address Book into a File: ");
                 Console.WriteLine("7. Read Address Book from a File: ");
-                Console.WriteLine("8. Clear Address Book Details from a File: ");
-                Console.WriteLine("9. Exit");
+                Console.WriteLine("8. Write and Read Address Book(CSV File): ");
+                Console.WriteLine("9. Write and Read Address Book(JSON File): ");
+                Console.WriteLine("10. Clear Address Book Details from a File: ");
+                Console.WriteLine("11. Exit");
 
                 Console.WriteLine("Enter your choice: ");
                 c1 = Convert.ToInt32(Console.ReadLine());
@@ -197,6 +199,14 @@ namespace AddressBook
                         }
                         break;
                     case 8:
+                        CSVHandler.WriteIntoCSVFile(sorted);
+                        Console.WriteLine("Data inserted successfully");
+                        //CSVHandler.ReadFromCSVFile();
+                        Console.WriteLine("Data read successfully");
+                        break;
+                    case 9:
+                        break;
+                    case 10:
                         File.WriteAllText(filePath, string.Empty);
                         Console.WriteLine("Data cleared successfully!!!");
                         break;
