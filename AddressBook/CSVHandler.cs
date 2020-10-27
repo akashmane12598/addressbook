@@ -11,44 +11,27 @@ namespace AddressBook
     public class CSVHandler
     {
         static string filePathCSV = @"C:\Users\LENOVO\source\repos\AddressBook\AddressBook\AddressBookCSV.csv";
-
-        public static void WriteIntoCSVFile(Dictionary<string, List<Contacts>> sorted)
+        public static void WriteIntoCSVFile(Dictionary<string, List<Contacts>> sorted, string bookName)
         {
-            using(StreamWriter stw=new StreamWriter(filePathCSV))
+            foreach (KeyValuePair<string, List<Contacts>> kv in sorted)
             {
-                using (CsvWriter writer=new CsvWriter(stw, CultureInfo.InvariantCulture))
+                string bookpath = kv.Key;
+                List<Contacts> contacts = kv.Value;
+
+                if (bookpath.Equals(bookName))
                 {
-                    foreach (KeyValuePair<string, List<Contacts>> kv in sorted)
+                    using (StreamWriter stw = new StreamWriter(filePathCSV))
                     {
-                        string a = kv.Key;
-                        List<Contacts> contacts = kv.Value;
-
-                        writer.WriteRecord<string>(a);
-
-                        foreach (Contacts c in contacts)
+                        using (CsvWriter writer = new CsvWriter(stw, CultureInfo.InvariantCulture))
                         {
-                            writer.WriteRecord<Contacts>(c);
+                            writer.WriteRecords<Contacts>(contacts);
                         }
                     }
-
-                    using (StreamReader str = new StreamReader(filePathCSV))
-                    {
-                        using (CsvReader reader = new CsvReader(str, CultureInfo.InvariantCulture))
-                        {
-                            var records = reader.GetRecords<Contacts>().ToList();
-
-                            foreach (Contacts c in records)
-                            {
-                                Console.WriteLine(c);
-                            }
-                        }
-                    }
-
                 }
             }
         }
 
-       /* public static void ReadFromCSVFile()
+        public static void ReadFromCSVFile()
         {
             Console.WriteLine("Reading from CSV File");
 
@@ -64,6 +47,6 @@ namespace AddressBook
                     }
                 }
             }
-        }*/
+        }
     }
 }

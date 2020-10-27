@@ -199,10 +199,19 @@ namespace AddressBook
                         }
                         break;
                     case 8:
-                        CSVHandler.WriteIntoCSVFile(sorted);
-                        Console.WriteLine("Data inserted successfully");
-                        //CSVHandler.ReadFromCSVFile();
-                        Console.WriteLine("Data read successfully");
+                        Console.WriteLine("Enter the Address Book Name:");
+                        string name = Console.ReadLine();
+                        if (sorted.ContainsKey(name))
+                        {
+                            CSVHandler.WriteIntoCSVFile(sorted, name);
+                            Console.WriteLine("Data inserted successfully");
+                            CSVHandler.ReadFromCSVFile();
+                            Console.WriteLine("Data read successfully");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Book Name Not Found");
+                        }
                         break;
                     case 9:
                         break;
