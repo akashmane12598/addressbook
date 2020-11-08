@@ -105,5 +105,57 @@ namespace AddressBook
                 connection.Close();
             }
         }
+
+        /// <summary>
+        /// UC19 RetrieveDataByCityorState
+        /// </summary>
+        public static void RetrieveDataByCityorState()
+        {
+            ContactsDB contactsDB = new ContactsDB();
+
+            try
+            {
+
+                connection = new SqlConnection(connectionString);
+                string query = "select c.FirstName, c.LastName, c.City, c.State, c.PhoneNumber, bk.B_Name, bk.B_Type from Contacts c inner join BookNameType bk on c.B_ID=bk.B_ID where City='Mulund' or State='Bengal'";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        contactsDB.first_name = reader.GetString(0);
+                        contactsDB.last_name = reader.GetString(1);
+                        contactsDB.city = reader.GetString(2);
+                        contactsDB.state = reader.GetString(3);
+                        contactsDB.phone = reader.GetString(4);
+                        contactsDB.B_Name = reader.GetString(5);
+                        contactsDB.B_Type = reader.GetString(6);
+                        Console.WriteLine("FirstName: " + contactsDB.first_name + ", LastName: " + contactsDB.last_name + ", City: " + contactsDB.city + ", State: " + contactsDB.state + ", Phone: " + contactsDB.phone + ", BookName: " + contactsDB.B_Name + ", BookType: " + contactsDB.B_Type);
+                        Console.WriteLine();                    
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No rows found");
+                }
+                reader.Close();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                connection.Close();
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+        }
     }
 }

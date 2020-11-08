@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection.PortableExecutable;
 
 namespace AddressBook
 {
@@ -13,7 +14,7 @@ namespace AddressBook
         {
             Dictionary<String, List<Contacts>> sorted = new Dictionary<String, List<Contacts>>();
             int c1 = 0;
-            while (c1 != 11)
+            while (c1 != 12)
             {
                 string bname="";
                 Console.WriteLine("Welcome to Address Book Program");
@@ -29,7 +30,8 @@ namespace AddressBook
                 Console.WriteLine("8. Write and Read Address Book(CSV File): ");
                 Console.WriteLine("9. Write and Read Address Book(JSON File): ");
                 Console.WriteLine("10. Clear Address Book Details from all Files(Txt, CSV, JSON): ");
-                Console.WriteLine("11. Exit");
+                Console.WriteLine("11. Retrieve Contacts By City or State From DB ");
+                Console.WriteLine("12. Exit");
 
                 Console.WriteLine("Enter your choice: ");
                 c1 = Convert.ToInt32(Console.ReadLine());
@@ -232,7 +234,10 @@ namespace AddressBook
                         CSVHandler.ClearData();
                         JSONHandler.ClearData();
                         Console.WriteLine("All Files cleared successfully!!!");
-                        break;                   
+                        break;
+                    case 11:
+                        AddressRepoDB.RetrieveDataByCityorState();
+                        break;
                 }
 
             }
