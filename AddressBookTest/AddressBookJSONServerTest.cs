@@ -117,5 +117,22 @@ namespace AddressBookTest
 
         }
 
+        /// <summary>
+        /// UC 25 DeleteContacts
+        /// </summary>
+        [TestMethod]
+        public void DeleteContacts()
+        {
+            //Arrange
+            RestRequest request = new RestRequest("/contacts/delete/4", Method.DELETE);
+
+            //Act
+            IRestResponse response = client.Execute(request);
+
+            //Assert
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
+
+        }
+
     }
 }

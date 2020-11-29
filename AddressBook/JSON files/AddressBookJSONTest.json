@@ -51,17 +51,6 @@
       "phone": 106098752,
       "email": "virat@gmail.com",
       "id": 3
-    },
-    {
-      "first_name": "Rohit",
-      "last_name": "Sharma",
-      "address": "Mumbai",
-      "city": "Worli",
-      "state": "Maharashtra",
-      "zip": 400004,
-      "phone": 106098752,
-      "email": "rohit@gmail.com",
-      "id": 4
     }
   ]
 >>>>>>> usecase23_AddContactstoAddressBookintoJSONServer
