@@ -1,6 +1,7 @@
 using AddressBook;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,7 @@ namespace AddressBookTest
     [TestClass]
     public class UnitTest1
     {
-        RestClient client;
-
-        [TestInitialize]
-        public void SetUp()
-        {
-            client = new RestClient("http://localhost:4000");
-        }
+        
         /// <summary>
         /// UC16
         /// </summary>
@@ -56,24 +51,8 @@ namespace AddressBookTest
             string actual = AddressRepoDB.UpdateDetailsInDB();
 
             Assert.AreEqual(expected, actual);
-        }
+        }       
 
-        [TestMethod]
-        public void RetrieveDataFromJSONServer()
-        {
-            RestRequest request = new RestRequest("/contacts", Method.GET);
-
-            IRestResponse response = client.Execute(request);
-
-            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
-
-            List<Contacts> contacts = JsonConvert.DeserializeObject<List<Contacts>>(response.Content);
-
-            foreach(Contacts c in contacts)
-            {
-                Console.WriteLine(c);
-            }
-
-        }
+        
     }
 }
