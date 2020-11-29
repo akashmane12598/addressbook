@@ -82,5 +82,40 @@ namespace AddressBookTest
             Console.WriteLine(response.Content);
 
         }
+
+        /// <summary>
+        /// UC24 UpdateContactsFromJsonServer
+        /// </summary>
+        [TestMethod]
+        public void UpdateContactsFromJsonServer()
+        {
+            RestRequest request = new RestRequest("/contacts/3", Method.PUT);
+
+            JObject jObject = new JObject();
+            jObject.Add("first_name", "Virat");
+            jObject.Add("last_name", "Kohli");
+            jObject.Add("address", "Mumbai");
+            jObject.Add("city", "Worli");
+            jObject.Add("state", "Maharashtra");
+            jObject.Add("zip", 400004);
+            jObject.Add("phone", 106098752);
+            jObject.Add("email", "virat@gmail.com");
+
+            request.AddParameter("application/json", jObject, ParameterType.RequestBody);
+
+            IRestResponse response = client.Execute(request);
+
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
+
+            Contacts contacts = JsonConvert.DeserializeObject<Contacts>(response.Content);
+
+            Assert.AreEqual("Virat", contacts.first_name);
+            Assert.AreEqual("Kohli", contacts.last_name);
+            Assert.AreEqual("virat@gmail.com", contacts.email);
+
+            Console.WriteLine(response.Content);
+
+        }
+
     }
 }
